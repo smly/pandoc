@@ -219,6 +219,9 @@ writers = [
   ,("s5"           , PureStringWriter $ \o ->
      writeHtmlString o{ writerSlideVariant = S5Slides
                       , writerTableOfContents = False })
+  ,("shower"       , PureStringWriter $ \o ->
+     writeHtmlString o{ writerSlideVariant = ShowerSlides
+                      , writerHtml5 = True })
   ,("slidy"        , PureStringWriter $ \o ->
      writeHtmlString o{ writerSlideVariant = SlidySlides })
   ,("slideous"     , PureStringWriter $ \o ->

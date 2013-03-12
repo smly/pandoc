@@ -252,6 +252,7 @@ data ObfuscationMethod = NoObfuscation
 
 -- | Varieties of HTML slide shows.
 data HTMLSlideVariant = S5Slides
+                      | ShowerSlides
                       | SlidySlides
                       | SlideousSlides
                       | DZSlides

@@ -277,7 +277,12 @@ elementToHtml slideLevel opts (Sec level num (id',classes,keyvals) title' elemen
   let num' = zipWith (+) num (writerNumberOffset opts ++ repeat 0)
   modify $ \st -> st{stSecNum = num'}  -- update section number
   -- always use level 1 for slide titles
-  let level' = if slide then 1 else level
+  let level' = if slide
+               then if writerSlideVariant opts == ShowerSlides
+                    then 2
+                    else 1
+               else level
+
   let titleSlide = slide && level < slideLevel
   header' <- if title' == [Str "\0"]  -- marker for hrule
                 then return mempty
@@ -296,7 +301,10 @@ elementToHtml slideLevel opts (Sec level num (id',classes,keyvals) title' elemen
                   ["level" ++ show level | slide || writerSectionDivs opts ]
                   ++ classes
   let secttag  = if writerHtml5 opts
-                    then H5.section
+                    then
+                        if writerSlideVariant opts == ShowerSlides
+                        then H5.section . H.div
+                        else H5.section
                     else H.div
   let attr = (id',classes',keyvals)
   return $ if titleSlide

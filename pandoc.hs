@@ -102,7 +102,7 @@ data Opt = Opt
     , optNumberSections    :: Bool    -- ^ Number sections in LaTeX
     , optNumberOffset        :: [Int]   -- ^ Starting number for sections
     , optSectionDivs       :: Bool    -- ^ Put sections in div tags in HTML
-    , optIncremental       :: Bool    -- ^ Use incremental lists in Slidy/Slideous/S5
+    , optIncremental       :: Bool    -- ^ Use incremental lists in Shower/Slidy/Slideous/S5
     , optSelfContained     :: Bool    -- ^ Make HTML accessible offline
     , optSmart             :: Bool    -- ^ Use smart typography
     , optOldDashes         :: Bool    -- ^ Parse dashes like pandoc <=1.8.2.1
@@ -492,7 +492,7 @@ options =
     , Option "i" ["incremental"]
                  (NoArg
                   (\opt -> return opt { optIncremental = True }))
-                 "" -- "Make list items display incrementally in Slidy/Slideous/S5"
+                 "" -- "Make list items display incrementally in Shower/Slidy/Slideous/S5"
 
     , Option "" ["slide-level"]
                  (ReqArg
@@ -1111,7 +1111,7 @@ main = do
                       >>= writerFn outputFile . handleEntities
           where htmlFormat = writerName' `elem`
                                ["html","html+lhs","html5","html5+lhs",
-                               "s5","slidy","slideous","dzslides"]
+                               "s5","shower","slidy","slideous","dzslides"]
                 selfcontain = if selfContained && htmlFormat
                                  then makeSelfContained datadir
                                  else return
